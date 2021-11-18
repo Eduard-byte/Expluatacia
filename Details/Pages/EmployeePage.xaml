@@ -1,0 +1,79 @@
+﻿<Page x:Class="Details.Pages.EmployeePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Details.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="EmployeePage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+
+        <!--Сортировка-->
+        <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 15">
+
+            <StackPanel Orientation="Horizontal" Margin="0 0 20 0 ">
+                <TextBlock Text="Введите имя сотрудника: " TextAlignment="Right"/>
+                <TextBox Width="180" Name="Search" SelectionChanged="Search_OnSelectionChanged"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Статус: " TextAlignment="Right"/>
+                <ComboBox Width="170" Name="StatusType" SelectionChanged="StatusType_OnSelectionChanged">
+                    <ComboBoxItem Content="Оплачен"/>
+                    <ComboBoxItem Content="Заявка отменена"/>
+                </ComboBox>
+            </StackPanel>
+
+        </WrapPanel>
+
+
+        <!--Вывод данных-->
+        <ListView Grid.Row="1"
+                  Name="ViewEmployee"
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                  HorizontalContentAlignment="Center">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="15" Width="280" Background="{Binding GetColor}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="250"/>
+                            <RowDefinition Height="25"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Image Width="240" Stretch="Uniform" HorizontalAlignment="Center"
+                               Margin="5" Source="{Binding Path=GetImage}"/>
+
+                        <WrapPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <TextBlock Text="{Binding FirstName}" FontSize="20"
+                                       Margin="0 0 10 0"/>
+                            <TextBlock Text="{Binding LastName}" FontSize="20"/>
+                        </WrapPanel>
+
+                        <TextBlock Text="{Binding Age, StringFormat=Возраст: {0}}"
+                                   Margin="15" HorizontalAlignment="Center"
+                                   FontSize="14" Grid.Row="2"/>
+
+                        <TextBlock Text="{Binding Path=GetStatus}" FontWeight="{Binding GetStatusFont}"
+                                   Margin="0  0 0 10" 
+                                   HorizontalAlignment="Center" Height="Auto" Grid.Row="3"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        
+    </Grid>
+</Page>
