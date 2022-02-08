@@ -18,7 +18,7 @@ namespace Details.Pages
 {
     public partial class AddEditPage : Page
     {
-        private Machine _machine = new Machine();
+        private readonly Machine _machine = new Machine();
 
         public AddEditPage(Machine selectedMachine)
         {

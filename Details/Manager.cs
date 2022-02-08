@@ -7,7 +7,7 @@ using System.Windows.Controls;
 
 namespace Details
 {
-    public class Manager
+    public static class Manager
     {
         public static Frame MainFrame { get; set; }
     }
